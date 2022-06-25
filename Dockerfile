@@ -16,9 +16,10 @@ COPY --from=builder /lib64/ld-linux-x86-64.so.2 /lib64/
 COPY --from=builder /lib/x86_64-linux-gnu/libunistring.so.2 /lib/x86_64-linux-gnu/
 COPY --from=builder /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/
 COPY --from=builder /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/
+COPY --from=builder /usr/bin/bash /usr/bin/sh /usr/bin/wget /bin/
+COPY resolv.conf /etc/
 COPY --from=builder /output /
-COPY --from=builder /usr/bin/bash /usr/bin/wget /bin/
-COPY B787.sh /B787.sh
+COPY B787.sh /
 VOLUME /output
 CMD /B787.sh
  
