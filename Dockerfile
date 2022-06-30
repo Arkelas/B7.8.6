@@ -17,10 +17,11 @@ COPY --from=builder /lib/x86_64-linux-gnu/libunistring.so.2 /lib/x86_64-linux-gn
 COPY --from=builder /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/
 COPY --from=builder /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/
 COPY --from=builder /usr/bin/bash /usr/bin/sh /usr/bin/wget /bin/
+#Попытка засунуть вручную настройки резольва. Видимо этого мало.
 COPY --from=builder /etc/resolv.conf /etc/
 COPY --from=builder /output /
 COPY B787.sh /
+#Если передать переменную не в виде IP, а как доменное имя - не отрезольвит.
+ENV SITE=34.223.124.45
 VOLUME /output
-CMD /B787.sh
- 
-
+ENTRYPOINT /B787.sh $SITE 
